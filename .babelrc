@@ -1,0 +1,8 @@
+{
+	"plugins": [
+	    "syntax-object-rest-spread",
+	    "syntax-trailing-function-commas",
+	    "transform-class-properties",
+	    "transform-es2015-modules-commonjs"
+  	]
+}
