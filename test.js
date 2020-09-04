@@ -5,9 +5,7 @@ describe('test', function() {
   const { By, until } = webdriver;
   let driver;
   this.timeout(30000);
-
-  before('Browserstack setup', async () => {
-    const { BROWSERSTACK_USER, BROWSERSTACK_KEY } = process.env;
+  const { BROWSERSTACK_USER, BROWSERSTACK_KEY } = process.env;
     const capabilities = {
       browserName: 'internet explorer',
       'browserstack.user': BROWSERSTACK_USER,
@@ -28,6 +26,15 @@ describe('test', function() {
       'browserstack.selenium_version': '3.141.59',
     };
 
+  // TODO: uncomment this code and comment the Browserstack setup to see the Actions API work as normal
+  // before('Local setup', async () => {
+  //   driver = await new webdriver.Builder()
+  //     .usingServer('http://192.168.56.2:4444/wd/hub')
+  //     .withCapabilities(capabilities)
+  //     .build();
+  // })
+
+  before('Browserstack setup', async () => {
     driver = await new webdriver.Builder()
       .usingServer('http://hub.browserstack.com/wd/hub')
       .withCapabilities(capabilities)
@@ -54,7 +61,7 @@ describe('test', function() {
           .actions()
           .move({ origin: button })
           .perform();
-    // this should just work, instead it fires the following error:
+    // this just works locally but instead it fires the following error on Browserstack:
     // "UnknownCommandError: Unrecognized command: actions"
   });
 
